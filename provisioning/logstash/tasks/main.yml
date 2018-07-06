@@ -1,0 +1,11 @@
+---
+# tasks file for logstash
+#
+#
+
+ - name: install logstash
+   apt: name=logstash state=present
+ 
+ - name: copy apache-01.conf
+   copy: src=templates/apache-01.conf dest=/etc/logstash/conf.d/apache-01.conf
+

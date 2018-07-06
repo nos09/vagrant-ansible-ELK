@@ -1,0 +1,30 @@
+---
+# tasks file for elk
+#
+  - name: Update apt
+    apt: update_cache=yes cache_valid_time=3600
+  - name: Install Java
+    apt: name=default-jre state=present
+
+# install elasticsearch repo and keys
+#
+  - name: apt key
+    apt_key: url=https://artifacts.elastic.co/GPG-KEY-elasticsearch state=present
+  - name: add repository
+    apt_repository: repo="deb https://artifacts.elastic.co/packages/6.x/apt stable main" state=present update_cache=yes
+
+# install elasticsearch
+#
+  - name: install elasticsearch
+    apt: name=elasticsearch state=present
+
+# Copy template 
+#
+  - name: copy the elasticserch template
+    copy: src=templates/elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml
+
+
+# Start elasticsearch service
+#
+  - name: start elasticserch
+    service: name=elasticsearch state=started

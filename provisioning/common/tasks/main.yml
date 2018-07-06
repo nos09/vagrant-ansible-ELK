@@ -1,0 +1,10 @@
+---
+# tasks file for common
+#
+#
+  - name: install python 
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python)
+    changed_when: false
+
+  - name: copy log file
+    copy: src=files/apache-daily-access.log dest=/home/vagrant/apache-daily-access.log

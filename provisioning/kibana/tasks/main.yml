@@ -1,0 +1,12 @@
+---
+# tasks file for kibana
+#
+
+ - name: install kibana
+   apt: name=kibana state=present
+
+ - name: copy the template
+   copy: src=templates/kibana.yml dest=/etc/kibana/kibana.yml 
+
+ - name: start kibana
+   service: name=kibana state=started
